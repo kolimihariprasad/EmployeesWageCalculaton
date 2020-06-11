@@ -10,6 +10,8 @@ class Employe {
 	int totalSalary=0;
 	int numWorkingDays=1;
 	int totalHrs=0;
+	int dailySalary[] = new int[20];
+	int monthlySalary[] = new int[20];
 	int EmployeeCheck() {
 			int empCheck=(int)(Math.random() * 10) % 3;
 			switch (empCheck) {
@@ -22,18 +24,27 @@ class Employe {
 			}
 	}
 	void WageCalculation() {
+		int day=0;
 		while(numWorkingDays<=TOTAL_WORKING_DAYS && totalHrs<=TOTAL_WORKING_HOURS) {
 			empHrs=EmployeeCheck();
 			if(totalHrs+empHrs<=100) {
 				totalHrs+=empHrs;
 			totalSalary=totalHrs*EMP_RATE_PER_HR;
 			numWorkingDays++;
-			System.out.println(totalSalary);
+			dailySalary[day]=empHrs*EMP_RATE_PER_HR;
+			monthlySalary[day]=totalSalary;
+			day++;
 			}
 		}
 	}
 	Employe() {
 		WageCalculation();
+		int day=1;
+		System.out.println("Day\tdailySalary\tmonthlySalary");
+		for(int i=0;i<=20;i++){
+		System.out.println("Day "+day+"\t\t"+dailySalary[i]+"\t\t"+monthlySalary[i]);
+			day++;
+		}
 	}
 }
 class EmpWageCalculation {
