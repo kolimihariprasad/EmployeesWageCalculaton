@@ -22,7 +22,7 @@ class Employe {
 			}
 	}
 	void WageCalculation() {
-		while(numWorkingDays<=TOTAL_WORKING_DAYS) {
+		while(numWorkingDays<=TOTAL_WORKING_DAYS && totalHrs<=TOTAL_WORKING_HOURS) {
 			empHrs=EmployeeCheck();
 			if(totalHrs+empHrs<=100) {
 				totalHrs+=empHrs;
