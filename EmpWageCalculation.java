@@ -8,13 +8,14 @@ class Employe {
 	int totalSalary=0;
 	int EmployeeCheck() {
 		int empCheck=(int)(Math.random() * 10) % 3;
-		 System.out.println(empCheck);
-		if (empCheck == IS_FULL_TIME)
-			return 8;
-		else if(empCheck == IS_PART_TIME)
-			return 4;
-		else
-			return 0;
+		switch (empCheck) {
+			case 2:
+				return 8;
+			case 1:
+				return 4;
+			default:
+				return 0;
+		}
 	}
 	void WageCalculation() {
 		empHrs=EmployeeCheck();
