@@ -30,9 +30,9 @@ class Employe {
 			if(totalHrs+empHrs<=100) {
 				totalHrs+=empHrs;
 			totalSalary=totalHrs*EMP_RATE_PER_HR;
-			numWorkingDays++;
 			dailySalary[day]=empHrs*EMP_RATE_PER_HR;
 			monthlySalary[day]=totalSalary;
+			numWorkingDays++;
 			day++;
 			}
 		}
@@ -41,15 +41,16 @@ class Employe {
 		WageCalculation();
 		int day=1;
 		System.out.println("Day\tdailySalary\tmonthlySalary");
-		for(int i=0;i<=20;i++){
-		System.out.println("Day "+day+"\t\t"+dailySalary[i]+"\t\t"+monthlySalary[i]);
-			day++;
+		for(int days=0;days<20;days++){
+		System.out.println("Day "+day+"\t\t"+dailySalary[days]+"\t\t"+monthlySalary[days]);
+		day++;
 		}
 	}
 }
 class EmpWageCalculation {
 	public static void main(String arrgs[]) {
 		Employe empOne = new Employe();
+		Employe empTwo = new Employe();
 
 	}
 }
