@@ -1,56 +1,36 @@
-class Employe {
-	//Constants
-	final int IS_FULL_TIME=2;
-	final int IS_PART_TIME=1;
-	final int EMP_RATE_PER_HR=20;
-	final int TOTAL_WORKING_DAYS=20;
-	final int TOTAL_WORKING_HOURS=100;
-	//Variables
-	int empHrs=0;
-	int totalSalary=0;
-	int numWorkingDays=1;
-	int totalHrs=0;
+class EmpWageCalculation {
 	int dailySalary[] = new int[20];
 	int monthlySalary[] = new int[20];
-	int EmployeeCheck() {
+	public static void calcEmpWageForCompany(String company, int empRatePerHr, int numWorkingDays, int totalWorkingHrs) {
+		//variables
+		int totalEmpHrs=0, totalEmpWage=0, totalWorkingDays=0, empWage=0;
+		//Calculation
+		while(totalWorkingDays<=numWorkingDays && totalEmpHrs<=totalWorkingHrs) {
+			int empHrs = 0;
+			totalWorkingDays++;
 			int empCheck=(int)(Math.random() * 10) % 3;
 			switch (empCheck) {
 				case 2:
-					return 8;
+					empHrs=8;
+					break;
 				case 1:
-					return 4;
+					empHrs=4;
+					break;
 				default:
-					return 0;
+					empHrs=0;
+					break;
 			}
-	}
-	void WageCalculation() {
-		int day=0;
-		while(numWorkingDays<=TOTAL_WORKING_DAYS && totalHrs<=TOTAL_WORKING_HOURS) {
-			empHrs=EmployeeCheck();
-			if(totalHrs+empHrs<=100) {
-				totalHrs+=empHrs;
-			totalSalary=totalHrs*EMP_RATE_PER_HR;
-			dailySalary[day]=empHrs*EMP_RATE_PER_HR;
-			monthlySalary[day]=totalSalary;
-			numWorkingDays++;
-			day++;
+			if(totalEmpHrs+empHrs <= totalWorkingHrs) {
+				totalEmpHrs += empHrs;
+				empWage = empHrs * empRatePerHr;
+				totalEmpWage += empWage;
 			}
+			System.out.println("EmpWage: "+empWage);
 		}
+		System.out.println("Total Employee Wage for company: "+company+" Salary: "+ totalEmpWage);
 	}
-	Employe() {
-		WageCalculation();
-		int day=1;
-		System.out.println("Day\tdailySalary\tmonthlySalary");
-		for(int days=0;days<20;days++){
-		System.out.println("Day "+day+"\t\t"+dailySalary[days]+"\t\t"+monthlySalary[days]);
-		day++;
-		}
-	}
-}
-class EmpWageCalculation {
 	public static void main(String arrgs[]) {
-		Employe empOne = new Employe();
-		Employe empTwo = new Employe();
-
+		calcEmpWageForCompany("Dmart",20,20,100);
+		calcEmpWageForCompany("Relaiance",10,40,200);
 	}
 }
