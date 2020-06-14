@@ -1,3 +1,4 @@
+import java.util.*;
 interface EmpWage {
 	void addCompanyEmpWage (String company, int empRatePerHour,int numOfWorkingDays, int maxHoursPerMonth);
 	void computeEmpWage();
@@ -25,20 +26,20 @@ public class EmpWageCalculation implements EmpWage{
 	public static final int IS_PART_TIME=1;
 	public static final int IS_FULL_TIME=2;
 
-	private int numOfCompanies =0;
-	private CompanyEmpWage[] companyEmpWageArray;
-
+	private LinkedList<CompanyEmpWage> companyEmpWageList;
+	
 	public EmpWageCalculation() {
-	companyEmpWageArray = new CompanyEmpWage[5];
+	companyEmpWageList = new LinkedList<>();
 	}
 	public void addCompanyEmpWage (String company, int empRatePerHour,int numOfWorkingDays, int maxHoursPerMonth) {
-		companyEmpWageArray[numOfCompanies] = new CompanyEmpWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth);
-		numOfCompanies++;
+		CompanyEmpWage companyEmpWage = new CompanyEmpWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth);
+		companyEmpWageList.add(companyEmpWage);
 	}
 	public void computeEmpWage() {
-		for(int i=0; i < numOfCompanies; i++) {
-			companyEmpWageArray[i].setTotalEmpWage(this.computeWage(companyEmpWageArray[i]));
-			System.out.println(companyEmpWageArray[i]);
+		for(int i=0; i <companyEmpWageList.size(); i++) {
+			CompanyEmpWage companyEmpWage = companyEmpWageList.get(i);
+			companyEmpWage.setTotalEmpWage(this.computeWage(companyEmpWage));
+			System.out.println(companyEmpWage);
 		}
 	}
 	int computeWage(CompanyEmpWage companyEmpWage) {
@@ -70,8 +71,8 @@ public class EmpWageCalculation implements EmpWage{
 	}
 	public static void main(String args[]){
 		EmpWageCalculation empWage = new EmpWageCalculation();
-		empWage.addCompanyEmpWage("Dmart",20,20,100);
-		empWage.addCompanyEmpWage("Tata",50,20,80);
+		empWage.addCompanyEmpWage(  "Dmart",  20,  20,  100 );
+		empWage.addCompanyEmpWage(  "Tata",  50,  20,  80 );
 		empWage.computeEmpWage();
 	}
 }
