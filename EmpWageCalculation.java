@@ -2,6 +2,7 @@ import java.util.*;
 interface EmpWage {
 	void addCompanyEmpWage (String company, int empRatePerHour,int numOfWorkingDays, int maxHoursPerMonth);
 	void computeEmpWage();
+	int getTotalWage(String company);
 	}
 class CompanyEmpWage {
 	String company;
@@ -27,13 +28,16 @@ public class EmpWageCalculation implements EmpWage{
 	public static final int IS_FULL_TIME=2;
 
 	private LinkedList<CompanyEmpWage> companyEmpWageList;
-	
+	private Map<String,CompanyEmpWage> companytoEmpWageMap;
+
 	public EmpWageCalculation() {
 	companyEmpWageList = new LinkedList<>();
+	companytoEmpWageMap = new HashMap<>();
 	}
 	public void addCompanyEmpWage (String company, int empRatePerHour,int numOfWorkingDays, int maxHoursPerMonth) {
 		CompanyEmpWage companyEmpWage = new CompanyEmpWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth);
 		companyEmpWageList.add(companyEmpWage);
+		companytoEmpWageMap.put(company, companyEmpWage);
 	}
 	public void computeEmpWage() {
 		for(int i=0; i <companyEmpWageList.size(); i++) {
@@ -41,6 +45,9 @@ public class EmpWageCalculation implements EmpWage{
 			companyEmpWage.setTotalEmpWage(this.computeWage(companyEmpWage));
 			System.out.println(companyEmpWage);
 		}
+	}
+	public int getTotalWage(String company) {
+		return companytoEmpWageMap.get(company).totalEmpWage;
 	}
 	int computeWage(CompanyEmpWage companyEmpWage) {
 		//variables
@@ -74,5 +81,6 @@ public class EmpWageCalculation implements EmpWage{
 		empWage.addCompanyEmpWage(  "Dmart",  20,  20,  100 );
 		empWage.addCompanyEmpWage(  "Tata",  50,  20,  80 );
 		empWage.computeEmpWage();
+		System.out.println("Total Wage for company: "+empWage.getTotalWage(  "Dmart" ));
 	}
 }
