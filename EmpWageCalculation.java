@@ -77,10 +77,27 @@ public class EmpWageCalculation implements EmpWage{
 		return wage;
 	}
 	public static void main(String args[]){
+		Scanner input = new Scanner(System.in);
 		EmpWageCalculation empWage = new EmpWageCalculation();
-		empWage.addCompanyEmpWage(  "Dmart",  20,  20,  100 );
-		empWage.addCompanyEmpWage(  "Tata",  50,  20,  80 );
-		empWage.computeEmpWage();
-		System.out.println("Total Wage for company: "+empWage.getTotalWage(  "Dmart" ));
+		int choice;
+		while(true){
+			System.out.print("press 1 to calculate wage for another company 0 to stop ");
+			choice =Integer.parseInt(input.nextLine());
+			if(choice == 0)
+				break;
+			System.out.print("Enter your Company name: ");
+			String cmpName=input.nextLine();
+			System.out.print("Enter your empRatePerHour name: ");
+			int empRateHour = Integer.parseInt(input.nextLine());
+			System.out.print("Enter your numOfWrkingDays name: ");
+			int numOfWrkingDays = Integer.parseInt(input.nextLine());
+			System.out.print("Enter your maxHoursPerMonth name: ");
+			int maxHoursPerMonth = Integer.parseInt(input.nextLine());
+			empWage.addCompanyEmpWage(  cmpName,  empRateHour,  numOfWrkingDays,  maxHoursPerMonth );
+			empWage.computeEmpWage();
+		}
+		System.out.print("Enter your Company name to get TotoalWage: ");
+		String Name=input.nextLine();
+		System.out.println("Total Wage for company: "+empWage.getTotalWage(Name));
 	}
 }
